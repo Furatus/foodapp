@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.foodapp.recipelist.recipecard.RecipeCard
 import com.example.foodapp.ui.theme.FoodappTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,10 +32,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+    RecipeCard(ImageUrl = "test", RecipeName = "test")
 }
 
 @Preview(showBackground = true)
