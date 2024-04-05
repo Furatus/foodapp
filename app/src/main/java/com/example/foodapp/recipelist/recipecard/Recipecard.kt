@@ -1,31 +1,35 @@
 package com.example.foodapp.recipelist.recipecard
 
-import android.content.Context
-import android.widget.ImageView
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.ImageBitmapConfig
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
+import androidx.compose.ui.unit.dp
+import coil.ImageLoader
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+
 
 @Composable
 fun RecipeCard(ImageUrl : String, RecipeName : String) {
-OutlinedCard {
-    Column {
-        var context : Context = LocalContext.current
-        val requestOptions = RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA)
-        val painterImage = Glide.with(context).asBitmap().load("https://cataas.com/cat").into(ImageView(context))
-        //Image(painter = painterImage, contentDescription = "description")
-        Text(text = RecipeName);
+OutlinedCard (modifier = Modifier
+    .fillMaxWidth()
+    .height(350.dp).requiredHeight(350.dp).padding(16.dp)){
+    Column (modifier = Modifier.padding(16.dp)) {
+        val imageloader = ImageLoader(context = LocalContext.current)
+        AsyncImage(model = ImageRequest.Builder(LocalContext.current).data(ImageUrl).crossfade(true).build(), contentDescription = "description_test", imageLoader = imageloader, modifier = Modifier
+            .height(150.dp)
+            .fillMaxWidth())
+        Spacer(modifier = Modifier.padding(16.dp))
+        Text(text = RecipeName, Modifier.size(50.dp).fillMaxWidth())
     }
 }
 }
