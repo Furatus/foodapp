@@ -12,6 +12,7 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
 import io.ktor.http.URLProtocol
 import io.ktor.http.encodedPath
+import java.net.URLEncoder
 
 suspend fun fetchRecipesJsonData(query : String, page: Int = 1) : recipelist {
 
@@ -34,7 +35,7 @@ suspend fun fetchRecipesJsonData(query : String, page: Int = 1) : recipelist {
         url{
             protocol = URLProtocol.HTTPS
             this.host = "food2fork.ca"
-            encodedPath = "/api/recipe/search/?query=${query}&page=${page}"
+            encodedPath = "/api/recipe/search/?query=${URLEncoder.encode(query,"UTF-8")}&page=${page}"
         }
     }
 

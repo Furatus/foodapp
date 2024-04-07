@@ -1,13 +1,11 @@
 package com.example.foodapp.recipelist.recipecard
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,11 +30,7 @@ OutlinedCard (modifier = Modifier
             .height(150.dp)
             .fillMaxWidth())
         Spacer(modifier = Modifier.padding(16.dp))
-
-        Row {
             Text(text = RecipeName/*, Modifier.size(50.dp).fillMaxWidth()*/)
-            Text(text = "test");
-        }
     }
 }
 }
