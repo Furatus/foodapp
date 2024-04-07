@@ -14,20 +14,30 @@ import com.example.foodapp.recipelist.recipecard.RecipeCard
 
 
 @Composable
-fun ShowList(search : String = "Beef Carrot") {
+fun ShowList(search : String? = "") {
     var recipelist by remember { mutableStateOf<recipelist?>(null) }
-    var currentPage by remember { mutableIntStateOf(0) }
+    var currentPage by remember { mutableIntStateOf(1) }
     val listState = rememberLazyListState()
 
+    LaunchedEffect(search) {
+        currentPage = 1
+        recipelist = recipelist?.copy(
+            count = 0,
+            next = null,
+            previous = null,
+            results = emptyList()
+        )
+    }
     LaunchedEffect(search, currentPage) {
-        val newRecipes = fetchRecipesJsonData(query = search, page = currentPage)
-        if (newRecipes.results.isNotEmpty()) {
-            recipelist = if (recipelist == null) {
-                newRecipes
-            } else {
-                recipelist!!.copy(results = recipelist!!.results + newRecipes.results)
+
+            val newRecipes = fetchRecipesJsonData(query = search, page = currentPage)
+            if (newRecipes.results.isNotEmpty()) {
+                recipelist = if (recipelist == null) {
+                    newRecipes
+                } else {
+                    recipelist!!.copy(results = recipelist!!.results + newRecipes.results)
+                }
             }
-        }
     }
 
     if(recipelist?.results.isNullOrEmpty()) {

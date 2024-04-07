@@ -14,9 +14,10 @@ import io.ktor.http.URLProtocol
 import io.ktor.http.encodedPath
 import java.net.URLEncoder
 
-suspend fun fetchRecipesJsonData(query : String, page: Int = 1) : recipelist {
+suspend fun fetchRecipesJsonData(query : String? = "", page: Int = 1) : recipelist {
 
-    val client = HttpClient() {
+
+    val client = HttpClient {
         install(Logging) {
             logger = Logger.DEFAULT
             level = LogLevel.HEADERS
@@ -41,8 +42,15 @@ suspend fun fetchRecipesJsonData(query : String, page: Int = 1) : recipelist {
 
     Log.d("http-response", response.bodyAsText())
 
-    val gson = Gson()
+    if (response.status.value == 200) {
+        val gson = Gson()
 
-    return gson.fromJson(response.bodyAsText(),recipelist::class.java)
-
+        return gson.fromJson(response.bodyAsText(), recipelist::class.java)
+    }
+    return recipelist(
+        count = 0,
+        next = null,
+        previous = null,
+        results = emptyList()
+    )
 }
