@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.example.foodapp.recipelist.SearchBar
 import com.example.foodapp.recipelist.SearchState
 import com.example.foodapp.recipelist.ShowList
+import com.example.foodapp.recipelist.ButtonfilterRow
 import com.example.foodapp.ui.theme.FoodappTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,7 +46,9 @@ class MainActivity : ComponentActivity() {
                     }
                     Column (modifier = Modifier.padding(5.dp)){
                         SearchBar(searchState = searchState)
-                        Spacer(modifier = Modifier.padding(20.dp))
+                        Spacer(modifier = Modifier.padding(2.dp))
+                        ButtonfilterRow(searchState = searchState)
+                        Spacer(modifier = Modifier.padding(4.dp))
                         ShowList(recipeSearch)
                     }
                 }
