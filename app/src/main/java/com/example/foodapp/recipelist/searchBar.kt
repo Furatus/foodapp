@@ -1,6 +1,7 @@
 package com.example.foodapp.recipelist
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -12,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 
 class SearchState(var onSearchSubmit: (String) -> Unit)
 
@@ -27,9 +29,9 @@ fun SearchBar(searchState: SearchState) {
             modifier = Modifier.weight(1f)
         )
         Button(
-            onClick = { searchState.onSearchSubmit(searchText) }
+            onClick = { searchState.onSearchSubmit(searchText) }, modifier = Modifier.padding(2.dp)
         ) {
-            Text(text = "Rechercher")
+            Text(text = "Search")
         }
     }
 }
