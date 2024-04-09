@@ -71,7 +71,7 @@ fun ShowList(search : String? = "", recipeDao: RecipeDao, navController: NavCont
             LazyColumn(state = listState) {
                 itemsIndexed(recipeList.results) { _, recipe ->
                     RecipeCard(ImageUrl = recipe.featured_image, RecipeName = recipe.title, navController = navController, recipe = recipe)
-                    Log.d("recipe_title", recipe.title)
+                    //Log.d("recipe_title", recipe.title)
                 }
             }
         }
