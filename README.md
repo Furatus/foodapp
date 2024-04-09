@@ -20,7 +20,7 @@ This project uses :
 
 - Simply open in android studio
 - Build Gradle and download dependencies
-- Build and Execute code, either on a virtual device a real one 
+- Build and Execute code, either on a virtual device or a real one 
 
 # Issues ?
 
