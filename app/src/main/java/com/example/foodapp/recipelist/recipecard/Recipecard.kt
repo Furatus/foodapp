@@ -1,5 +1,6 @@
 package com.example.foodapp.recipelist.recipecard
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,17 +14,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.foodapp.RecipesScreens
+import com.example.foodapp.data.model.recipe
 
 
 @Composable
-fun RecipeCard(ImageUrl : String, RecipeName : String) {
+fun RecipeCard(ImageUrl : String, RecipeName : String, navController: NavController, recipe: recipe) {
 OutlinedCard (modifier = Modifier
     .fillMaxWidth()
     .height(250.dp)
     .requiredHeight(250.dp)
+    /*.clickable(onClick = {"${navController.navigate(RecipesScreens.RecipeDetailsScreen.route)}/${recipe}"})*/
     .padding(16.dp)){
     Column (modifier = Modifier.padding(0.dp)) {
         val imageloader = ImageLoader(context = LocalContext.current)
