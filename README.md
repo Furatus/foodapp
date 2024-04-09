@@ -3,7 +3,7 @@ Student Project - android native kotlin app with jetpack compose
 
 this app is a recipe list app, with a search bar, simple filters and details when clicking on a recipe
 
-###Please check your android version before executing, it WON'T EXECUTE OR WORK CORRECTLY ON Android 7 OR LESS.
+### Please check your android version before executing, it WON'T EXECUTE OR WORK CORRECTLY ON Android 7 OR LESS.
 
 this project has been done under one week, things may not be perfect
 
