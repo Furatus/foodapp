@@ -2,6 +2,9 @@ package com.example.foodapp.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.Gson
+import java.net.URLEncoder
+
 
 @Entity
 data class recipe (
@@ -19,4 +22,10 @@ data class recipe (
     val date_updated : String,
     val long_date_added : Long,
     val long_date_updated: Long
-)
+) {
+
+    fun toJson(): String {
+        val recipeJson =  Gson().toJson(this)
+        return URLEncoder.encode(recipeJson, "UTF-8")
+    }
+}

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.devtools.ksp") version "1.9.0-1.0.13"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
+    id("kotlin-parcelize")
 }
 
 android {
@@ -85,6 +86,9 @@ dependencies {
 
     //coil
     implementation("io.coil-kt:coil-compose:2.6.0")
+
+    //navigation-compose
+    implementation("androidx.navigation:navigation-compose:2.7.4")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

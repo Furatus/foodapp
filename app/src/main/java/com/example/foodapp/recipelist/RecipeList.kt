@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import com.example.foodapp.data.RecipeDao
 import com.example.foodapp.data.fetchRecipesJsonData
 import com.example.foodapp.data.model.recipelist
@@ -21,7 +22,7 @@ import kotlinx.coroutines.delay
 
 
 @Composable
-fun ShowList(search : String? = "", recipeDao: RecipeDao) {
+fun ShowList(search : String? = "", recipeDao: RecipeDao, navController: NavController) {
     var recipelist by remember { mutableStateOf<recipelist?>(null) }
     var currentPage by remember { mutableIntStateOf(1) }
     val listState = rememberLazyListState()
@@ -69,7 +70,7 @@ fun ShowList(search : String? = "", recipeDao: RecipeDao) {
         recipelist?.let { recipeList ->
             LazyColumn(state = listState) {
                 itemsIndexed(recipeList.results) { _, recipe ->
-                    RecipeCard(ImageUrl = recipe.featured_image, RecipeName = recipe.title)
+                    RecipeCard(ImageUrl = recipe.featured_image, RecipeName = recipe.title, navController = navController, recipe = recipe)
                     Log.d("recipe_title", recipe.title)
                 }
             }
