@@ -28,7 +28,8 @@ OutlinedCard (modifier = Modifier
     .fillMaxWidth()
     .height(250.dp)
     .requiredHeight(250.dp)
-    /*.clickable(onClick = {"${navController.navigate(RecipesScreens.RecipeDetailsScreen.route)}/${recipe}"})*/
+    .clickable(onClick = {val recipeJson = recipe.toJson()
+         navController.navigate(route = "${RecipesScreens.RecipeDetailsScreen.route}/${recipeJson}")})
     .padding(16.dp)){
     Column (modifier = Modifier.padding(0.dp)) {
         val imageloader = ImageLoader(context = LocalContext.current)
