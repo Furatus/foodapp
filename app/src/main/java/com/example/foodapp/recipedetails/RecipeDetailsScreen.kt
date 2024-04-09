@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,15 +24,28 @@ import com.example.foodapp.data.model.recipe
 @Composable
 fun RecipeDetailsScreen(recipe: recipe) {
     val imageloader = ImageLoader(context = LocalContext.current)
-    AsyncImage(model = ImageRequest.Builder(LocalContext.current).data(recipe.featured_image).crossfade(true).build(), contentDescription = "description_test", imageLoader = imageloader, contentScale = ContentScale.Crop, modifier = Modifier
-        .height(300.dp)
-        .fillMaxWidth())
+    Column {
+
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current).data(recipe.featured_image)
+                .crossfade(true).build(),
+            contentDescription = "description_test",
+            imageLoader = imageloader,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .height(300.dp)
+                .fillMaxWidth()
+        )
+
         Column(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState())
+                .fillMaxWidth()
         ) {
 
             Text(
-                text = recipe.title,
+                text = reformatString(recipe.title),
                 style = TextStyle(
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
@@ -40,7 +55,7 @@ fun RecipeDetailsScreen(recipe: recipe) {
             )
 
             Text(
-                text = recipe.description,
+                text = reformatString(recipe.description),
                 style = TextStyle(
                     fontSize = 16.sp,
                     color = Color.Gray
@@ -49,15 +64,34 @@ fun RecipeDetailsScreen(recipe: recipe) {
             )
 
             Text(
-                text = recipe.date_added,
+                text = reformatString("by ${recipe.publisher}"),
                 style = TextStyle(
                     fontSize = 14.sp,
                     color = Color.Gray
                 ),
                 modifier = Modifier.padding(bottom = 16.dp)
             )
+
             Text(
-                text = "Ingrédients:",
+                text = reformatString(recipe.date_added),
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    color = Color.Gray
+                ),
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+
+            Text(
+                text = reformatString("Rating : ${recipe.rating}"),
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    color = Color.Gray
+                ),
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+
+            Text(
+                text = "Ingredients:",
                 style = TextStyle(
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
@@ -68,7 +102,7 @@ fun RecipeDetailsScreen(recipe: recipe) {
 
             recipe.ingredients.forEach { ingredient ->
                 Text(
-                    text = "- $ingredient",
+                    text = reformatString("- $ingredient"),
                     style = TextStyle(
                         fontSize = 14.sp,
                         color = Color.Black
@@ -77,4 +111,9 @@ fun RecipeDetailsScreen(recipe: recipe) {
                 )
             }
         }
+    }
+}
+
+fun reformatString(string : String) : String {
+    return string.replace("+"," ")
 }

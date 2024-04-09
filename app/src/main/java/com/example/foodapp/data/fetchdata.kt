@@ -49,15 +49,15 @@ suspend fun fetchRecipesJsonData(query : String? = "", page: Int = 1, recipeDao:
             }
         }
 
-        Log.d("http-response", response.bodyAsText())
+        //Log.d("http-response", response.bodyAsText())
 
         if (response.status.value == 200) {
             val gson = Gson()
             val result = gson.fromJson(response.bodyAsText(), recipelist::class.java)
-            Log.d("data-json-deserialized", result.results.toString() )
+            //Log.d("data-json-deserialized", result.results.toString() )
             result.results.forEach { recipe ->
                 recipeDao.insert(recipe)
-                Log.d("Room", "Inserted recipe ${recipe.title}")
+                //Log.d("Room", "Inserted recipe ${recipe.title}")
             }
 
             return result
